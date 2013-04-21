@@ -1,0 +1,3 @@
+#!/bin/bash
+
+find . -name '*.html' | parallel perl -i -pe 's/\.mp4/.webm/g'

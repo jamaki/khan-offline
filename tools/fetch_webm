@@ -1,0 +1,12 @@
+#!/bin/bash
+
+# Given the name of a video file, test that the webm file does not exists
+# * fetch the matching webm file
+# * move it in place next to the original video file
+#
+# E.g.
+#   fetch_webm algebra/videos/Nx4Xk5S4HQA.mp4
+#   => algebra/videos/Nx4Xk5S4HQA.webm
+
+FILE=$1
+parallel -u "test -e {//}/{/.}.webm || (youtube-dl -f 43 http://www.youtube.com/watch?v={/.} && mv ./{/.}.webm {//})" ::: $FILE
