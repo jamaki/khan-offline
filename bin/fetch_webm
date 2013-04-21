@@ -9,4 +9,4 @@
 #   => algebra/videos/Nx4Xk5S4HQA.webm
 
 FILE=$1
-parallel -u "test -e {//}/{/.}.webm || (youtube-dl -f 43 http://www.youtube.com/watch?v={/.} && mv ./{/.}.webm {//})" ::: $FILE
+parallel -s 500 -u "test -e {//}/{/.}.webm || (youtube-dl -f 43 http://www.youtube.com/watch?v={/.} && mv ./{/.}.webm {//})" ::: $FILE
