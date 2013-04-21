@@ -1,4 +1,7 @@
-fetch: fetch_firefox fetch_video ck12
+all: fetch mp4_to_webm DVDs
+	true
+
+fetch: fetch_firefox fetch_video fetch_ck12
 	true
 
 fetch_firefox:
@@ -8,16 +11,16 @@ fetch_firefox:
 
 fetch_video:
 	bin/fetch_webm dsFQ9kM1qDs.mp4; cp dsFQ9kM1qDs.webm KhanAcademyOffline/khan_academy_overview.webm
-	parallel -j5 bin/fetch_webm ::: KhanAcademyOffline/*/videos/*
+	parallel -j10 'bin/fetch_webm {} && echo -n .' ::: KhanAcademyOffline/*/videos/*
 
-mp4_to_webm:
-	bin/replace_mp4_with_webm
-
-ck12: KhanAcademyOffline/ck12/ck12_algebra1.pdf
+fetch_ck12: KhanAcademyOffline/ck12/ck12_algebra1.pdf
 	true
 
 KhanAcademyOffline/ck12/ck12_algebra1.pdf:
 	cd KhanAcademyOffline/ck12; wget http://rachel.worldpossible.org/ck12/ck12_algebra1.pdf
+
+mp4_to_webm:
+	bin/replace_mp4_with_webm
 
 DVDs:
 	seq 5 | parallel mkdir -p DVD{}
