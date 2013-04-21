@@ -9,4 +9,4 @@
 #   => algebra/videos/Nx4Xk5S4HQA.webm
 
 WEBM=$(echo $1 | perl -pe 's:\.[^./]+$:.webm:;')
-test -e $WEBM || parallel -s 500 -u "(youtube-dl -f 43 http://www.youtube.com/watch?v={/.} && mv ./{/.}.webm {//})" ::: $WEBM
+test -e $WEBM || parallel -s 500 -u "((youtube-dl -f 43 http://www.youtube.com/watch?v={/.} || youtube-dl -f 44 http://www.youtube.com/watch?v={/.}) && mv ./{/.}.webm {//})" ::: $WEBM
