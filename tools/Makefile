@@ -10,6 +10,13 @@ fetch_video:
 mp4_to_webm:
 	cd ..; tools/replace_mp4_with_webm
 
+ck12: ../ck12/ck12_algebra1.pdf
+	true
+
+../ck12/ck12_algebra1.pdf:
+	cd ../ck12; wget http://rachel.worldpossible.org/ck12/ck12_algebra1.pdf
+
 clean:
 	cd ..; rm *.webm.part Firefox*
 	find .. -name '*.webm' | parallel -X rm
+	rm ../ck12/ck12_algebra1.pdf
